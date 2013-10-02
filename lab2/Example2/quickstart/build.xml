@@ -38,7 +38,7 @@
         <javac debug="on" 
                fork="true"
                destdir="${build.dir}/classes" 
-               srcdir="${basedir}/src"
+               srcdir="${basedir}/src/samples/quickstart/service/pojo"
                classpathref="axis2.classpath">
         </javac>
     </target>
