@@ -1,7 +1,4 @@
-package it.unitn.science.soaa.parser;
-
 import java.io.IOException;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -26,12 +23,15 @@ public class XPathTest {
 
 	    XPathFactory factory = XPathFactory.newInstance();
 	    XPath xpath = factory.newXPath();
-	    XPathExpression expr = xpath.compile("/bookstore/book/title/text()");
+	    XPathExpression expr = xpath.compile("/inventory/book/title/text()");
+		XPathExpression expr2 = xpath.compile("/inventory/book/author/text()");
 
 	    Object result = expr.evaluate(doc, XPathConstants.NODESET);
+		Object result2 = expr2.evaluate(doc, XPathConstants.NODESET);
 	    NodeList nodes = (NodeList) result;
-	    for (int i = 0; i < nodes.getLength(); i++) {
-				System.out.println(nodes.item(i).getNodeValue());
+		NodeList nodes2 = (NodeList) result2;
+	    for (int i = 0; i < nodes.getLength() && i < nodes2.getLength() ; i++) {
+				System.out.println("title: "+nodes.item(i).getNodeValue()+", author:"+nodes2.item(i).getNodeValue());
 			}	
 
 	  }
