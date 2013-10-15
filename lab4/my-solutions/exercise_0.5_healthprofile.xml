@@ -1,0 +1,10 @@
+<person id="231">        
+    <firstName>George R. R.</firstName>
+    <lastName>Martin</lastName>
+    <birthDate>1970-06-21</birthDate>
+    <age>43</age>
+    <healthProfile>
+           <weight>60</weight>
+           <height>1.85</height>
+    </healthProfile>
+</person>
