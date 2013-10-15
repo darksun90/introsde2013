@@ -1,0 +1,13 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <xsd:complexType name="chunkType" mixed="true">
+        <xsd:choice maxOccurs="unbounded">
+            <xsd:element name="b" type="chunkType"/>
+            <xsd:element name="i" type="chunkType"/>
+        </xsd:choice>
+    </xsd:complexType>
+    <xsd:complexType name="TextType" >
+        <xsd:sequence>
+            <xsd:element name="p" type="chunkType"/>
+        </xsd:sequence>
+    </xsd:complexType>
+</xsd:schema>
