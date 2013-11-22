@@ -1,9 +1,7 @@
 package model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 
 
 /**
@@ -13,14 +11,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name="\"MeasureDefinition\"")
 @NamedQuery(name="MeasureDefinition.findAll", query="SELECT m FROM MeasureDefinition m")
-@XmlRootElement
 public class MeasureDefinition implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="\"idMeasureDef\"")
-	private Long idMeasureDef;
+	private int idMeasureDef;
 
 	@Column(name="\"measureName\"")
 	private String measureName;
@@ -31,11 +28,11 @@ public class MeasureDefinition implements Serializable {
 	public MeasureDefinition() {
 	}
 
-	public Long getIdMeasureDef() {
+	public int getIdMeasureDef() {
 		return this.idMeasureDef;
 	}
 
-	public void setIdMeasureDef(Long idMeasureDef) {
+	public void setIdMeasureDef(int idMeasureDef) {
 		this.idMeasureDef = idMeasureDef;
 	}
 

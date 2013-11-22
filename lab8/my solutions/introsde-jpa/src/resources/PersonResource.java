@@ -50,6 +50,7 @@ public class PersonResource {
 	}
 
 	// for the browser
+	@SuppressWarnings("unused")
 	@GET
 	@Produces(MediaType.TEXT_XML)
 	public Person getPersonHTML() {
@@ -82,7 +83,7 @@ public class PersonResource {
 	private Response putAndGetResponse(Person person) {
 		Response res;
 		
-		Person existing = getPersonById(person.getIdPerson());
+		Person existing = getPersonById(Long.parseLong(""+person.getIdPerson()));
 		
 		if (existing == null) {
 			res = Response.noContent().build();
@@ -98,7 +99,7 @@ public class PersonResource {
 		System.out.println("Reading person from DB with id: "+personId);
 		//Person person = entityManager.find(Person.class, personId);
 		
-		Person person = PersonDao.instance.getPersonById(personId);
+		Person person = PersonDao.getPersonById(Long.parseLong(""+personId));
 		System.out.println("Person: "+person.toString());
 		return person;
 	}

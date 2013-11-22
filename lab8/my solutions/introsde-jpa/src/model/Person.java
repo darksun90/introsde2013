@@ -3,9 +3,9 @@ package model;
 import java.io.Serializable;
 
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -15,25 +15,20 @@ import java.util.Date;
 @Entity
 @Table(name="\"Person\"")
 @NamedQuery(name="Person.findAll", query="SELECT p FROM Person p")
-@XmlRootElement
 public class Person implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name="\"birthdate\"")
 	private Date birthdate;
-	
+
 	@Column(name="\"email\"")
 	private String email;
 
 	@Id
-//	@GeneratedValue(strategy=GenerationType.TABLE)
-	@GeneratedValue(generator="sqlite")
-	@TableGenerator(name="sqlite", table="sqlite_sequence",
-	    pkColumnName="name", valueColumnName="seq",
-	    pkColumnValue="Person")
+	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="\"idPerson\"")
-	private Long idPerson;
+	private int idPerson;
 
 	@Column(name="\"lastname\"")
 	private String lastname;
@@ -44,9 +39,12 @@ public class Person implements Serializable {
 	@Column(name="\"username\"")
 	private String username;
 
+	@OneToMany(mappedBy="person", cascade=CascadeType.ALL, fetch=FetchType.EAGER)
+	private List<LifeStatus> lifeStatus;
+	
 	public Person() {
 	}
-	
+
 	public Date getBirthdate() {
 		return this.birthdate;
 	}
@@ -63,11 +61,11 @@ public class Person implements Serializable {
 		this.email = email;
 	}
 
-	public Long getIdPerson() {
+	public int getIdPerson() {
 		return this.idPerson;
 	}
 
-	public void setIdPerson(Long idPerson) {
+	public void setIdPerson(int idPerson) {
 		this.idPerson = idPerson;
 	}
 
@@ -94,4 +92,13 @@ public class Person implements Serializable {
 	public void setUsername(String username) {
 		this.username = username;
 	}
+
+	public List<LifeStatus> getLifeStatus() {
+		return lifeStatus;
+	}
+
+	public void setLifeStatus(List<LifeStatus> lifeStatus) {
+		this.lifeStatus = lifeStatus;
+	}
+	
 }

@@ -3,7 +3,6 @@ package resources;
 import model.Person;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.*;
@@ -24,11 +23,6 @@ import javax.ws.rs.core.UriInfo;
 
 import dao.PersonDao;
 
-/*
- * TODO 
- * - There is a problem with the EntityManager injection through @PersistenceUnit or @PersistenceContext
- * - will look into it later
- */
 
 @Stateless
 @LocalBean//Will map the resource to the URL /ehealth/v2
@@ -54,7 +48,7 @@ public class PeopleResource {
 	@GET
 	@Produces(MediaType.TEXT_XML)
 	public List<Person> getPersonsBrowser() {
-	    List<Person> people = PersonDao.instance.getAll();
+	    List<Person> people = PersonDao.getAll();
 		return people;
 	}
 
@@ -100,7 +94,7 @@ public class PeopleResource {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public List<Person> getPersonListJson() {
 		//List<Person> people = entityManager.createNamedQuery("Person.findAll", Person.class).getResultList();
-	    List<Person> people = PersonDao.instance.getAll();
+	    List<Person> people = PersonDao.getAll();
 		return people;
 	}
 
@@ -112,7 +106,7 @@ public class PeopleResource {
 	public String getCount() {
 		System.out.println("Getting count...");
 	    //List<Person> list = entityManager.createNamedQuery("Person.findAll", Person.class).getResultList();
-	    List<Person> people = PersonDao.instance.getAll();
+	    List<Person> people = PersonDao.getAll();
 		int count = people.size();
 		return String.valueOf(count);
 	}

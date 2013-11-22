@@ -1,11 +1,8 @@
 package model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
-
-import java.sql.Timestamp;
+import java.util.Date;
 
 
 /**
@@ -15,23 +12,23 @@ import java.sql.Timestamp;
 @Entity
 @Table(name="\"HealthMeasureHistory\"")
 @NamedQuery(name="HealthMeasureHistory.findAll", query="SELECT h FROM HealthMeasureHistory h")
-@XmlRootElement
 public class HealthMeasureHistory implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="\"idMeasureDefinition\"")
-	private Long idMeasureDefinition;
+	private int idMeasureDefinition;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="\"idMeasureHistory\"")
-	private Long idMeasureHistory;
+	private int idMeasureHistory;
 
 	@Column(name="\"idPerson\"")
-	private Long idPerson;
+	private int idPerson;
 
+	@Temporal(TemporalType.DATE)
 	@Column(name="\"timestamp\"")
-	private Timestamp timestamp;
+	private Date timestamp;
 
 	@Column(name="\"value\"")
 	private String value;
@@ -39,35 +36,35 @@ public class HealthMeasureHistory implements Serializable {
 	public HealthMeasureHistory() {
 	}
 
-	public Long getIdMeasureDefinition() {
+	public int getIdMeasureDefinition() {
 		return this.idMeasureDefinition;
 	}
 
-	public void setIdMeasureDefinition(Long idMeasureDefinition) {
+	public void setIdMeasureDefinition(int idMeasureDefinition) {
 		this.idMeasureDefinition = idMeasureDefinition;
 	}
 
-	public Long getIdMeasureHistory() {
+	public int getIdMeasureHistory() {
 		return this.idMeasureHistory;
 	}
 
-	public void setIdMeasureHistory(Long idMeasureHistory) {
+	public void setIdMeasureHistory(int idMeasureHistory) {
 		this.idMeasureHistory = idMeasureHistory;
 	}
 
-	public Long getIdPerson() {
+	public int getIdPerson() {
 		return this.idPerson;
 	}
 
-	public void setIdPerson(Long idPerson) {
+	public void setIdPerson(int idPerson) {
 		this.idPerson = idPerson;
 	}
 
-	public Timestamp getTimestamp() {
+	public Date getTimestamp() {
 		return this.timestamp;
 	}
 
-	public void setTimestamp(Timestamp timestamp) {
+	public void setTimestamp(Date timestamp) {
 		this.timestamp = timestamp;
 	}
 

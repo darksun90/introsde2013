@@ -1,9 +1,7 @@
 package model;
 
 import java.io.Serializable;
-
 import javax.persistence.*;
-import javax.xml.bind.annotation.XmlRootElement;
 
 
 /**
@@ -13,23 +11,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name="\"MeasureDefaultRange\"")
 @NamedQuery(name="MeasureDefaultRange.findAll", query="SELECT m FROM MeasureDefaultRange m")
-@XmlRootElement
 public class MeasureDefaultRange implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="\"alarmLevel\"")
-	private String alarmLevel;
+	private int alarmLevel;
 
 	@Column(name="\"endValue\"")
 	private String endValue;
 
 	@Column(name="\"idMeasureDef\"")
-	private Long idMeasureDef;
+	private int idMeasureDef;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name="\"idRange\"")
-	private Long idRange;
+	private int idRange;
 
 	@Column(name="\"rangeName\"")
 	private String rangeName;
@@ -40,11 +37,11 @@ public class MeasureDefaultRange implements Serializable {
 	public MeasureDefaultRange() {
 	}
 
-	public String getAlarmLevel() {
+	public int getAlarmLevel() {
 		return this.alarmLevel;
 	}
 
-	public void setAlarmLevel(String alarmLevel) {
+	public void setAlarmLevel(int alarmLevel) {
 		this.alarmLevel = alarmLevel;
 	}
 
@@ -56,19 +53,19 @@ public class MeasureDefaultRange implements Serializable {
 		this.endValue = endValue;
 	}
 
-	public Long getIdMeasureDef() {
+	public int getIdMeasureDef() {
 		return this.idMeasureDef;
 	}
 
-	public void setIdMeasureDef(Long idMeasureDef) {
+	public void setIdMeasureDef(int idMeasureDef) {
 		this.idMeasureDef = idMeasureDef;
 	}
 
-	public Long getIdRange() {
+	public int getIdRange() {
 		return this.idRange;
 	}
 
-	public void setIdRange(Long idRange) {
+	public void setIdRange(int idRange) {
 		this.idRange = idRange;
 	}
 
