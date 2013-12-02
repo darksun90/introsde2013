@@ -21,7 +21,7 @@ import model.MeasureDefinition;
 
 import javax.persistence.OneToOne;
 
-import dao.PersonDao;
+import dao.LifeCoachDao;
 
 /**
  * The persistent class for the "LifeStatus" database table.
@@ -40,7 +40,7 @@ public class LifeStatus implements Serializable {
 	    pkColumnName="name", valueColumnName="seq",
 	    pkColumnValue="LifeStatus")
 	@Column(name = "idMeasure")
-	private Long idMeasure;
+	private int idMeasure;
 
 	@Column(name = "value")
 	private String value;
@@ -57,11 +57,11 @@ public class LifeStatus implements Serializable {
 	public LifeStatus() {
 	}
 
-	public Long getIdMeasure() {
+	public int getIdMeasure() {
 		return this.idMeasure;
 	}
 
-	public void setIdMeasure(Long idMeasure) {
+	public void setIdMeasure(int idMeasure) {
 		this.idMeasure = idMeasure;
 	}
 
@@ -91,47 +91,47 @@ public class LifeStatus implements Serializable {
 	}
 	
 	// Database Operations
-	public static LifeStatus getLifeStatusById(Long lifestatusId) {
-		EntityManager em = PersonDao.instance.createEntityManager();
+	public static LifeStatus getLifeStatusById(int lifestatusId) {
+		EntityManager em = LifeCoachDao.instance.createEntityManager();
 		LifeStatus p = em.find(LifeStatus.class, lifestatusId);
-		PersonDao.instance.closeConnections(em);
+		LifeCoachDao.instance.closeConnections(em);
 		return p;
 	}
 	
 	public static List<LifeStatus> getAll() {
-		EntityManager em = PersonDao.instance.createEntityManager();
+		EntityManager em = LifeCoachDao.instance.createEntityManager();
 	    List<LifeStatus> list = em.createNamedQuery("LifeStatus.findAll", LifeStatus.class).getResultList();
-	    PersonDao.instance.closeConnections(em);
+	    LifeCoachDao.instance.closeConnections(em);
 	    return list;
 	}
 	
 	public static LifeStatus saveLifeStatus(LifeStatus p) {
-		EntityManager em = PersonDao.instance.createEntityManager();
+		EntityManager em = LifeCoachDao.instance.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		em.persist(p);
 		tx.commit();
-	    PersonDao.instance.closeConnections(em);
+	    LifeCoachDao.instance.closeConnections(em);
 	    return p;
 	}
 	
 	public static LifeStatus updateLifeStatus(LifeStatus p) {
-		EntityManager em = PersonDao.instance.createEntityManager();
+		EntityManager em = LifeCoachDao.instance.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		p=em.merge(p);
 		tx.commit();
-	    PersonDao.instance.closeConnections(em);
+	    LifeCoachDao.instance.closeConnections(em);
 	    return p;
 	}
 	
 	public static void removeLifeStatus(LifeStatus p) {
-		EntityManager em = PersonDao.instance.createEntityManager();
+		EntityManager em = LifeCoachDao.instance.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 	    p=em.merge(p);
 	    em.remove(p);
 	    tx.commit();
-	    PersonDao.instance.closeConnections(em);
+	    LifeCoachDao.instance.closeConnections(em);
 	}
 }

@@ -17,7 +17,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import javax.xml.bind.JAXBElement;
 
-import dao.PersonDao;
+import dao.LifeCoachDao;
 
 
 @Stateless
@@ -30,16 +30,16 @@ public class PersonResource {
 	
 	EntityManager entityManager;
 	
-	Long id;
+	int id;
 
-	public PersonResource(UriInfo uriInfo, Request request,Long id, EntityManager em) {
+	public PersonResource(UriInfo uriInfo, Request request,int id, EntityManager em) {
 		this.uriInfo = uriInfo;
 		this.request = request;
 		this.id = id;
 		this.entityManager = em;
 	}
 	
-	public PersonResource(UriInfo uriInfo, Request request,Long id) {
+	public PersonResource(UriInfo uriInfo, Request request,int id) {
 		this.uriInfo = uriInfo;
 		this.request = request;
 		this.id = id;
@@ -60,17 +60,17 @@ public class PersonResource {
 	@Produces(MediaType.TEXT_XML)
 	public Person getPersonHTML() {
 		Person person = this.getPersonById(id);
-		System.out.println("Person... " + person.toString());
 		if (person == null)
 			throw new RuntimeException("Get: Person with " + id + " not found");
-
-		System.out.println("Returning person... " + person.toString());
+		System.out.println("Returning person... " + person.getIdPerson());
 		return person;
 	}
 
+	// notice that here, we already obtaine the JAXBElement of the person 
 	@PUT
 	@Consumes(MediaType.APPLICATION_XML)
 	public Response putPerson(JAXBElement<Person> person) {
+		// the value of the JAXBElement is the person itself
 		Person c = person.getValue();
 		return putAndGetResponse(c);
 	}
@@ -94,13 +94,13 @@ public class PersonResource {
 			res = Response.noContent().build();
 		} else {
 			res = Response.created(uriInfo.getAbsolutePath()).build();
+			Person.updatePerson(person);
 		}
 
-		Person.updatePerson(person);
 		return res;
 	}
 	
-	public Person getPersonById(Long personId) {
+	public Person getPersonById(int personId) {
 		System.out.println("Reading person from DB with id: "+personId);
 		//Person person = entityManager.find(Person.class, personId);
 		

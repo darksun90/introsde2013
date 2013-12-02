@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import dao.PersonDao;
+import dao.LifeCoachDao;
 
 import java.util.Date;
 import java.util.List;
@@ -44,7 +44,7 @@ public class Person implements Serializable {
 	    pkColumnName="name", valueColumnName="seq",
 	    pkColumnValue="Person")
 	@Column(name="idPerson")
-	private Long idPerson;
+	private int idPerson;
 
 	@Column(name="lastname")
 	private String lastname;
@@ -78,11 +78,11 @@ public class Person implements Serializable {
 		this.email = email;
 	}
 
-	public Long getIdPerson() {
+	public int getIdPerson() {
 		return this.idPerson;
 	}
 
-	public void setIdPerson(Long idPerson) {
+	public void setIdPerson(int idPerson) {
 		this.idPerson = idPerson;
 	}
 
@@ -121,47 +121,47 @@ public class Person implements Serializable {
 	}
 	
 	// Database operations
-	public static Person getPersonById(Long personId) {
-		EntityManager em = PersonDao.instance.createEntityManager();
+	public static Person getPersonById(int personId) {
+		EntityManager em = LifeCoachDao.instance.createEntityManager();
 		Person p = em.find(Person.class, personId);
-		PersonDao.instance.closeConnections(em);
+		LifeCoachDao.instance.closeConnections(em);
 		return p;
 	}
 	
 	public static List<Person> getAll() {
-		EntityManager em = PersonDao.instance.createEntityManager();
+		EntityManager em = LifeCoachDao.instance.createEntityManager();
 	    List<Person> list = em.createNamedQuery("Person.findAll", Person.class).getResultList();
-	    PersonDao.instance.closeConnections(em);
+	    LifeCoachDao.instance.closeConnections(em);
 	    return list;
 	}
 	
 	public static Person savePerson(Person p) {
-		EntityManager em = PersonDao.instance.createEntityManager();
+		EntityManager em = LifeCoachDao.instance.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		em.persist(p);
 		tx.commit();
-	    PersonDao.instance.closeConnections(em);
+	    LifeCoachDao.instance.closeConnections(em);
 	    return p;
 	}
 	
 	public static Person updatePerson(Person p) {
-		EntityManager em = PersonDao.instance.createEntityManager();
+		EntityManager em = LifeCoachDao.instance.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 		p=em.merge(p);
 		tx.commit();
-	    PersonDao.instance.closeConnections(em);
+	    LifeCoachDao.instance.closeConnections(em);
 	    return p;
 	}
 	
 	public static void removePerson(Person p) {
-		EntityManager em = PersonDao.instance.createEntityManager();
+		EntityManager em = LifeCoachDao.instance.createEntityManager();
 		EntityTransaction tx = em.getTransaction();
 		tx.begin();
 	    p=em.merge(p);
 	    em.remove(p);
 	    tx.commit();
-	    PersonDao.instance.closeConnections(em);
+	    LifeCoachDao.instance.closeConnections(em);
 	}
 }
