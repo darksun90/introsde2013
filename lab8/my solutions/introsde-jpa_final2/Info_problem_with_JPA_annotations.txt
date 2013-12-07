@@ -1,0 +1,8 @@
+Hi everyone, 
+
+Just a quick note on JPA annotations, sqlite and eclipse. 
+
+If you see errors in eclipse with the message "Tablet XYZ cannot be resolved" while the table with that name correctly exists, there is a solution
+
+This code will work if you execute it, but to get rid of the "error message" in eclipse, replace "HealthMeasureHistory" with "\"HealthMeasureHistory\"" (this is valid for all the other JPA annotations, i have udpated the JPA code of the lab for that)
+ 
